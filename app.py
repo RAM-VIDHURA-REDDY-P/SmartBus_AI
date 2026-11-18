@@ -19,7 +19,8 @@ def create_app():
     login_manager.init_app(app)
     mail.init_app(app)
 
-    csrf = CSRFProtect(app)
+    # Enable CSRF protection
+    CSRFProtect(app)
 
     # Import database models
     from models.user import User
@@ -27,7 +28,10 @@ def create_app():
     # Load logged-in user
     @login_manager.user_loader
     def load_user(user_id):
-        return db.session.get(User, int(user_id))
+        try:
+            return db.session.get(User, int(user_id))
+        except (ValueError, TypeError):
+            return None
 
     # Import application routes
     from routes.auth_routes import auth
@@ -79,10 +83,12 @@ def create_app():
     return app
 
 
-# Run application
-if __name__ == "__main__":
+# Expose Flask application for Vercel
+app = create_app()
 
-    app = create_app()
+
+# Local development
+if __name__ == "__main__":
 
     with app.app_context():
         db.create_all()
