@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Passenger Dashboard | SmartBus AI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/navigation.css') }}">
+
+    <script src="{{ url_for('static', filename='js/navigation.js') }}"
+            defer></script>
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-header">
+        <h1>SMARTBUS AI</h1>
+
+        <a href="{{ url_for('auth.logout') }}"
+           class="back-button"
+           style="width:auto;">
+            Logout
+        </a>
+    </div>
+
+    <h2>Passenger Dashboard</h2>
+
+    <p class="subtitle" style="text-align:left;">
+        Welcome, {{ user.full_name }}!
+    </p>
+
+    <p class="subtitle" style="text-align:left;">
+        Email: {{ user.email }}
+    </p>
+
+    <div class="dashboard-card">
+        <h3>Passenger Services</h3>
+
+        <ul class="feature-list">
+            <li>Search for available buses</li>
+            <li>Find nearest boarding points</li>
+            <li>Book bus tickets</li>
+            <li>Pre-order food at rest stops</li>
+            <li>Track bus arrival time</li>
+            <li>Receive rest-stop wake-up alerts</li>
+            <li>Find a Smart Travel Buddy</li>
+            <li>Receive arrival notifications</li>
+        </ul>
+    </div>
+
+    <a href="{{ url_for('auth.logout') }}" class="back-button">
+        ← Logout and Return to Login
+    </a>
+
+</div>
+
+</body>
+</html>
